@@ -1,3 +1,14 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do 
+      resources :menu_items
+      resources :menu_types
+      resources :menu_classes
+      resources :sessions, only: [:create, :destroy]
+      resources :condiments
+      resources :menu_options
+      resources :orders, only: [:create, :index, :update]
+      get '/verify', to: 'custom#verify_transaction'
+    end
+  end
 end

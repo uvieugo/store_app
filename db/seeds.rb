@@ -1,7 +1,82 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+MenuClass.create!([
+  {name: "Soft Drinks"},
+  {name: "Light Meal"},
+  {name: "Alcholic Drinks"},
+  {name: "Salads"},
+  {name: "From The Grill"},
+  {name: "Nigerian Cuisine"},
+  {name: "Toasted Treat"},
+  {name: "Dessert"}
+])
+MenuItem.create!([
+  {menu_class_id: 1,  name: "Powerhorse", price: 1000.0, object_num: "107042"},
+  {menu_class_id: 2,  name: "Peppered Cow", price: 3000.0, object_num: "106233"},
+  {menu_class_id: 3,  name: "Gulder", price: 1000.0, object_num: "200015"},
+  {menu_class_id: 2,  name: "Peppered Snail", price: 4500.0, object_num: "106236"},
+  {menu_class_id: 3,  name: "Harp", price: 1000.0, object_num: "200016"},
+  {menu_class_id: 6,  name: "Isewu", price: 2500.0, object_num: "200392"},
+  {menu_class_id: 4,  name: "Qualibest Salad", price: 3500.0, object_num: "200324"},
+  {menu_class_id: 5,  name: "Half Roasted", price: 1500.0, object_num: "200364"},
+  {menu_class_id: 4,  name: "Caesar Salad", price: 2000.0, object_num: "200322"},
+  {menu_class_id: 5,  name: "Fillet Steak", price: 5500.0, object_num: "200367"},
+  {menu_class_id: 1,  name: "Fayrouz", price: 500.0, object_num: "107005"},
+  {menu_class_id: 2,  name: "Club Sandwich", price: 2000.0, object_num: "106226"},
+  {menu_class_id: 1,  name: "Fanta Orange", price: 500.0, object_num: "107031"},
+  {menu_class_id: 5,  name: "Nigerian Spicy", price: 3700.0, object_num: "200363"},
+  {menu_class_id: 1,  name: "Soda Water", price: 500.0, object_num: "107033"},
+  {menu_class_id: 5,  name: "Grilled Chicken", price: 2600.0, object_num: "200370"},
+  {menu_class_id: 8,  name: "Exotic Fruit", price: 800.0, object_num: "200481"},
+  {menu_class_id: 5,  name: "Club Sandwich", price: 2500.0, object_num: "200369"},
+  {menu_class_id: 2,  name: "Chicken Suya", price: 3000.0, object_num: "106229"},
+  {menu_class_id: 6,  name: "Nkwobi", price: 2500.0, object_num: "200391"},
+  {menu_class_id: 1,  name: "Malta Guiness", price: 900.0, object_num: "107040"},
+  {menu_class_id: 7,  name: "Whole Bread", price: 500.0, object_num: "200421"},
+  {menu_class_id: 5,  name: "Grilled Lamb", price: 5000.0, object_num: "200368"},
+  {menu_class_id: 1,  name: "Coke", price: 500.0, object_num: "107001"},
+  {menu_class_id: 3,  name: "Heineken Large", price: 1200.0, object_num: "200012"},
+  {menu_class_id: 8,  name: "Sliced Cake", price: 1000.0, object_num: "200483"},
+  {menu_class_id: 2,  name: "Peppered Goat", price: 3000.0, object_num: "106231"},
+  {menu_class_id: 3,  name: "Life", price: 1000.0, object_num: "200014"},
+  {menu_class_id: 1,  name: "Fresh Juice", price: 1050.0, object_num: "102012"},
+  {menu_class_id: 1,  name: "Packet Juice", price: 1500.0, object_num: "107043"},
+  {menu_class_id: 1,  name: "Sprite", price: 500.0, object_num: "107032"},
+  {menu_class_id: 3,  name: "Smirnoff Ice", price: 1200.0, object_num: "200019"},
+  {menu_class_id: 7,  name: "Bread Rolls", price: 300.0, object_num: "200422"},
+  {menu_class_id: 2,  name: "Beef Suya", price: 3000.0, object_num: "106228"},
+  {menu_class_id: 1,  name: "Can Drink", price: 950.0, object_num: "108005"},
+  {menu_class_id: 4,  name: "Greek Salad", price: 3000.0, object_num: "200321"},
+  {menu_class_id: 1,  name: "Tonic Water", price: 500.0, object_num: "107035"},
+  {menu_class_id: 2,  name: "Peppered Grilled", price: 3500.0, object_num: "106235"},
+  {menu_class_id: 3,  name: "Guiness Large", price: 1200.0, object_num: "200017"},
+  {menu_class_id: 3,  name: "Budweiser", price: 1200.0, object_num: "200021"},
+  {menu_class_id: 3,  name: "Star", price: 1000.0, object_num: "200013"},
+  {menu_class_id: 1,  name: "Coke Zero", price: 700.0, object_num: "107002"},
+  {menu_class_id: 5,  name: "Mushroom &Cheese", price: 3600.0, object_num: "200362"},
+  {menu_class_id: 2,  name: "Chkn Spring Roll", price: 2500.0, object_num: "106230"},
+  {menu_class_id: 7,  name: "Meat Pie", price: 450.0, object_num: "200424"},
+  {menu_class_id: 8,  name: "Sliced Fresh", price: 1100.0, object_num: "200482"},
+  {menu_class_id: 5,  name: "Giwa Ruwa", price: 3800.0, object_num: "200366"},
+  {menu_class_id: 1,  name: "Maltina", price: 900.0, object_num: "107038"},
+  {menu_class_id: 1,  name: "Red Bull", price: 1000.0, object_num: "107041"},
+  {menu_class_id: 3,  name: "Guiness Small", price: 1000.0, object_num: "200018"},
+  {menu_class_id: 5,  name: "Classic Beef", price: 3500.0, object_num: "200361"},
+  {menu_class_id: 1,  name: "Limca Soda", price: 500.0, object_num: "107006"},
+  {menu_class_id: 1,  name: "Water Large", price: 900.0, object_num: "107037"},
+  {menu_class_id: 2,  name: "Chicken Wings", price: 3000.0, object_num: "106227"},
+  {menu_class_id: 7,  name: "Croisants", price: 350.0, object_num: "200423"},
+  {menu_class_id: 3,  name: "Goldberg", price: 1000.0, object_num: "200022"},
+  {menu_class_id: 5,  name: "Full Roasted", price: 3000.0, object_num: "200365"},
+  {menu_class_id: 1,  name: "Bitter Lemon", price: 500.0, object_num: "107034"},
+  {menu_class_id: 1,  name: "Water Small", price: 500.0, object_num: "107036"},
+  {menu_class_id: 2,  name: "Peppered Chicken", price: 3000.0, object_num: "106232"},
+  {menu_class_id: 1,  name: "AMstel Malt", price: 900.0, object_num: "107039"},
+  {menu_class_id: 1,  name: "Mirinda", price: 500.0, object_num: "107004"},
+  {menu_class_id: 3,  name: "Hero", price: 1000.0, object_num: "200020"},
+  {menu_class_id: 6,  name: "Ugba", price: 2500.0, object_num: "200393"},
+  {menu_class_id: 1,  name: "Pepsi", price: 500.0, object_num: "107003"},
+  {menu_class_id: 7,  name: "Chicken Pie", price: 450.0, object_num: "200425"}
+])
+
+User.create!([
+  {email: "uvie.ugo@gmail.com", password: "dragon"}
+])
