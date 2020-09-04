@@ -11,4 +11,8 @@ Rails.application.routes.draw do
       get '/verify', to: 'custom#verify_transaction'
     end
   end
+
+  get '*path', to: 'application#frontend_index_html', constraints: lambda { |request|
+    !request.xhr? && request.format.html?
+  }
 end
