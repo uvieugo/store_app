@@ -1,5 +1,6 @@
 class Api::V1::CondimentsController < ApplicationController
   before_action :set_condiment, only: [:show, :update, :destroy]
+  skip_before_action :authenticate_request!, only: [:index, :show]
 
   # GET /condiments
   def index

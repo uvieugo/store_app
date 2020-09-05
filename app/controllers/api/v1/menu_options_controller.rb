@@ -1,7 +1,7 @@
 class Api::V1::MenuOptionsController < ApplicationController
   before_action :set_menu_option, only: [:show, :update, :destroy]
   before_action :get_menu_item, only: [:index]
-  skip_before_action :authenticate_request!#, only: [:index, :show]
+  skip_before_action :authenticate_request!, only: [:index, :show]
 
   # GET /menu_options
   def index
