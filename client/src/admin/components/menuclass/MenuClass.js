@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {addMenuClass, handleError} from '../../data/connection'
+import {addMenuClass, handleError} from '../../../data/connection'
 const MenuClass = (props) => {
   const [formData, setFormData] = useState("")
 

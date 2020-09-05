@@ -1,8 +1,8 @@
 import React, {useState, useMemo, useEffect} from 'react'
-import {addMenuItem, updateMenuItem, getMenuItems} from '../../data/connection'
+import {addMenuItem, updateMenuItem, getMenuItems} from '../../../data/connection'
 import Table from './Table'
-import AddItem from './menuitem/AddItem'
-import AddOption from './menuitem/AddOption'
+import AddItem from './AddItem'
+import AddOption from './AddOption'
 
 const MenuItem = (props) => {
   const defMenuItem = {

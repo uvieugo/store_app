@@ -2,57 +2,35 @@ import axios from 'axios'
 let token
 
 const instance = axios.create({
-  // baseURL: 'http://localhost:3000/api/v1'
+  baseURL: '/api/v1'
 });
 
 export const setToken = (auth_token) => {
   if (localStorage.getItem('auth_token') === null) { localStorage.setItem('auth_token', auth_token) }
   if (token === undefined){token = auth_token || localStorage.getItem('auth_token')}
+  instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }
 
 export const getMenuClasses = () => {
-  setToken()
-  return instance.get('/api/v1/menu_classes',{
-    headers: {
-      "Authorization": `Bearer ${token}`
-    }
-  });
+  return instance.get('/menu_classes')
 }
 
 export const getMenuTypes = () =>{
-  setToken()
-  return instance.get('/api/v1/menu_types',{
-    headers: {
-      "Authorization": `Bearer ${token}`
-    }
-  });
+  return instance.get('/menu_types')
 }
 
 export const getMenuItems = () => {
-  setToken()
-  return instance.get('/api/v1/menu_items',{
-    headers: {
-      "Authorization": `Bearer ${token}`
-    }
-  })
+  return instance.get('/menu_items')
 }
 
 export const getCondiments = () => {
-  setToken()
-  return instance.get('/api/v1/condiments',{
-    headers: {
-      "Authorization": `Bearer ${token}`
-    }
-  })
+  return instance.get('/condiments')
 }
 
 export const addMenuClass = (data) => {
   setToken()
   let postData = {name: data}
-  return instance.post('/api/v1/menu_classes', {
-    headers: {
-      "Authorization": `Bearer ${token}`
-    },
+  return instance.post('/menu_classes', {
     menu_class: postData
   })
 }
@@ -60,8 +38,7 @@ export const addMenuClass = (data) => {
 export const addMenuItem = (data) => {
   setToken()
   // let postData = {data}
-  instance.defaults.headers.common['Authorization'] = token;
-  return instance.post('/api/v1/menu_items',{
+  return instance.post('/menu_items',{
     menu_item: data,
   })
 }
@@ -69,14 +46,13 @@ export const addMenuItem = (data) => {
 export const addCondiment = (data) => {
   setToken()
   // let postData = {data}
-  instance.defaults.headers.common['Authorization'] = token;
-  return instance.post('/api/v1/condiments',{
+  return instance.post('/condiments',{
     condiment: data,
   })
 }
 
 export const createSession = (data) => {
-  return instance.post('/api/v1/sessions',{
+  return instance.post('/sessions',{
     email: data.email,
     password: data.password
   });
@@ -98,9 +74,8 @@ export const handleError = (error) => {
 }
 
 export const updateCondiment = (data) => {
-  setToken()
-  instance.defaults.headers.common['Authorization'] = token;
-  return instance.patch(`/api/v1/condiments/${data.id}`, {
+  setToken();
+  return instance.patch(`/condiments/${data.id}`, {
     name: data.name,
     price: data.price,
     object_num: data.object_num
@@ -109,8 +84,7 @@ export const updateCondiment = (data) => {
 
 export const updateMenuItem = (data) => {
   setToken()
-  instance.defaults.headers.common['Authorization'] = token;
-  return instance.patch(`/api/v1/menu_items/${data.id}`, {
+  return instance.patch(`/menu_items/${data.id}`, {
     menu_item: {name: data.name,
     price: data.price,
     object_num: data.object_num,
@@ -120,8 +94,7 @@ export const updateMenuItem = (data) => {
 
 export const addMenuOption = (data) => {
   setToken()
-  instance.defaults.headers.common['Authorization'] = token;
-  return instance.post('/api/v1/menu_options', {
+  return instance.post('/menu_options', {
     menu_option: {
       menu_item_id: data.menu_item_id,
       condiment_id: data.condiment_id
@@ -133,7 +106,7 @@ export const addOrder = (data) => {
   let orderDetails = {...data}
   delete orderDetails.status
   delete orderDetails.orderNum
-  return instance.post("/api/v1/orders", {
+  return instance.post("/orders", {
     order: {
       details: orderDetails,
       status: data.status,
@@ -144,7 +117,7 @@ export const addOrder = (data) => {
 }
 
 export const verifyTransaction = (reference) => {
-  return instance.get("/api/v1/verify", {
+  return instance.get("/verify", {
     params: {
       trxref: reference
     }
