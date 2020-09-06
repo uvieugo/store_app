@@ -14,9 +14,10 @@ import Condiments from './components/condiment/Condiments'
 import MyLoader from './Loader'
 window.$ = window.jQuery = require('jquery')
 require('admin-lte')
-// jQuery.adminlte
 
 const Admin = () => {
+  // const addBodyClass = className => document.body.classList.add("className");
+
   const [isLoading, setIsLoading] = useState(true)
   const [menuClass, setMenuClass] = useState([])
   const [menuItems, setMenuItems] = useState([])
@@ -26,6 +27,10 @@ const Admin = () => {
   const [selectPage, setSelectPage] = useState()
   const [pageTitle, setPageTitle] = useState("")
   
+  useEffect( () => {
+    // document.body.classList.add("sidebar-mini")
+    document.body.classList.add("layout-fixed")
+  })
   useEffect(() => {
     if (localStorage.getItem('auth_token')){
       setIsloggedIn(true)
