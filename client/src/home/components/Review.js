@@ -21,8 +21,21 @@ const Review = (props) => {
 
   const handlePayComplete = () => {
     console.log("add order to db here")
-    verifyTransaction(props.myOrder.trxRef).then(response => {
-      console.log(response.data)
+    if (process.env.NODE_ENV === 'production'){
+      verifyTransaction(props.myOrder.trxRef).then(response => {
+        console.log(response.data)
+        addOrder(props.myOrder).then(response => {
+          console.log(response.data.order_num)
+          props.setOrder(prev => {
+            let newOrder = {...prev}
+            newOrder.orderNum = response.data.order_num
+            return newOrder
+          })
+        })
+        props.setPage("complete")
+      })
+
+    }else{
       addOrder(props.myOrder).then(response => {
         console.log(response.data.order_num)
         props.setOrder(prev => {
@@ -32,7 +45,7 @@ const Review = (props) => {
         })
       })
       props.setPage("complete")
-    })
+    }
   }
 
   return(
@@ -42,8 +55,13 @@ const Review = (props) => {
           <p>Order Name: {props.myOrder.firstName + "" + props.myOrder.lastName}</p>
           <p>Order Email: {props.myOrder.email}</p>
           <p>Order Amount: ₦{props.myOrder.totalAmount}</p>
-          <PaystackButton className="btn btn-secondary btn-lg" {...componentProps} />
-          {/* <button onClick={handlePayComplete}>Place Order</button> */}
+          {
+            process.env.NODE_ENV === 'production' 
+            ?
+              <PaystackButton className="btn btn-secondary btn-lg" {...componentProps} />
+            :
+              <button className="btn btn-success" onClick={handlePayComplete}>Place Order</button>
+          }
         </div>
       </div>
     </div>
