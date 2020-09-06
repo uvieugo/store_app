@@ -35,7 +35,9 @@ const Order = (props) => {
         ...userdetails,
         ...props.cart,
         orderNum: "",
-        trxRef: `order-${randomstring.generate(8)}`
+        trxRef: `order-${randomstring.generate(8)}`,
+        order_type: props.orderType
+
       }
       return newOrder
     })

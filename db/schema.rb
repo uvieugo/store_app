@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_09_02_044531) do
     t.boolean "status"
     t.boolean "pos_status"
     t.string "order_num"
+    t.integer "order_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

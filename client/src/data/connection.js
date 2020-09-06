@@ -115,7 +115,8 @@ export const addOrder = (data) => {
     order: {
       details: orderDetails,
       status: data.status,
-      order_num: data.orderNum
+      order_num: data.orderNum,
+      order_type: data.order_type    
     }
   }
   )

@@ -4,6 +4,7 @@ import Menu from './Menu'
 import Order from './Order'
 import Complete from './Complete'
 import Review from './Review'
+import SetOrderType from './SetOrderType'
 import {getMenuItems} from '../../data/connection'
 
 const cartitem = {
@@ -17,6 +18,7 @@ const Store = (props) => {
   const [ myCart, setCart] = useState(cartitem)
   const [myOrder, setOrder] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const [orderType, setOrderType] = useState("")
 
    const resetApp = () => {
     setPage("menu")
@@ -38,8 +40,13 @@ const Store = (props) => {
   if( page === 'menu'){
     return(
       <div className="wrapper">
-      <Header text={"Quick Service Menu"}/>  
-      <Menu menuItems={menuItems} setPage={setPage} cart={myCart} setCart={setCart} isLoading={isLoading}/> 
+      <Header text={"Quick Service Menu"}/>
+      {
+        orderType === "" ?
+        <SetOrderType  setOrderType={setOrderType} /> 
+        :
+        <Menu menuItems={menuItems} setPage={setPage} cart={myCart} setCart={setCart} isLoading={isLoading}/> 
+      }
       </div>
     )
   }
@@ -47,7 +54,7 @@ const Store = (props) => {
     return(
       <div className="wrapper">
       <Header text={"Checkout"}/>
-      <Order cart={myCart} setOrder={setOrder} setPage={setPage} myOrder={myOrder}/>
+      <Order cart={myCart} setOrder={setOrder} setPage={setPage} myOrder={myOrder} orderType={orderType}/>
       </div>
     )
   }
@@ -55,7 +62,7 @@ const Store = (props) => {
     return(
       <div className="wrapper">
       <Header text={"Review Order"}/>
-      <Review myOrder={myOrder} setOrder={setOrder} setPage={setPage}/>
+      <Review myOrder={myOrder} setOrder={setOrder} setPage={setPage} />
       </div>
     )
   }

@@ -5,6 +5,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.boolean :status, defaults: false
       t.boolean :pos_status, defaults: false
       t.string :order_num
+      t.integer :order_type
 
       t.timestamps
     end
