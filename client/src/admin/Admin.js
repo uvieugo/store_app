@@ -12,6 +12,9 @@ import ContentArea from './components/ContentArea'
 import Dashboard from './components/dashboard/Dashboard'
 import Condiments from './components/condiment/Condiments'
 import MyLoader from './Loader'
+window.$ = window.jQuery = require('jquery')
+require('admin-lte')
+// jQuery.adminlte
 
 const Admin = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -73,9 +76,9 @@ const Admin = () => {
     }else{
       return (
         <div className="wrapper">
-          <Header setIsloggedIn={setIsloggedIn}/>
-          <Sidebar setSelectPage={setSelectPage}/>
-          <ContentArea activePage={activePage} pageTitle={pageTitle}/>
+            <Header setIsloggedIn={setIsloggedIn}/>
+            <Sidebar setSelectPage={setSelectPage}/>
+            <ContentArea activePage={activePage} pageTitle={pageTitle}/>
         </div>
       )
     }
