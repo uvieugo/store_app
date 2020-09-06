@@ -63,7 +63,7 @@ export const handleError = (error) => {
     // console.log(error.response.data);
     // console.log(error.response.status);
     // console.log(error.response.headers);
-    return (error.response.data.error)
+    return (error.response.data)
   } else if (error.request) {
     // console.log(error.request);
   } else {
@@ -100,6 +100,11 @@ export const addMenuOption = (data) => {
       condiment_id: data.condiment_id
   }
   })
+}
+
+export const removeMenuOption = (data) => {
+  setToken()
+  return instance.delete(`/menu_options/${data}`)
 }
 
 export const addOrder = (data) => {

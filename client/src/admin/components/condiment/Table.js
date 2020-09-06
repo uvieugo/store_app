@@ -1,10 +1,9 @@
 import React, { useState} from 'react'
 import { useTable, usePagination, useSortBy, useRowSelect, useRowState } from 'react-table'
-import Button from 'react-bootstrap/Button'
-import MyModal from '../menuitem/MyModal'
+
 
 const Table = (props) => {
-  const [showModal, setShowModal] = useState(false)
+
   const { columns, data} = props
   const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow, canPreviousPage,
     canNextPage,
@@ -22,9 +21,7 @@ const Table = (props) => {
         {
           Cell: ({ row }) => (
             <>
-            <Button variant="primary"  onClick={() => rowSelect(row)} disabled={props.isUpdate}>
-                Edit
-            </Button>
+            <button className="btn btn-primary btn-sm" onClick={() => rowSelect(row)} disabled={props.isUpdate}>Edit</button>
             </>
           ),
         },  
@@ -35,12 +32,6 @@ const Table = (props) => {
       props.setIsUpdate(prev => !prev)
       console.log(props.isUpdate)
       props.setCondiment({...row.values})
-    }
-    const handleModalShow = () => {
-      props.setShowModal(true)
-    }
-    const handleModalClose = () => {
-      props.setShowModal(false)
     }
     return(
     <>
@@ -125,7 +116,6 @@ const Table = (props) => {
             </ul>
           </nav>
         </div>
-        <MyModal show={showModal} onHide={handleModalClose}/>
       </div>
 
       </>

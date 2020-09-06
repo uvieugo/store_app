@@ -4,13 +4,12 @@ class Api::V1::MenuItemsController < ApplicationController
 
   # GET /menu_items
   def index
-    @menu_items = MenuItem.all.includes([:menu_class, :menu_options, :condiments]).order(id: :asc)
-    # @menu_options = @menu_item.menu_options
+    @menu_items = MenuItem.all.includes([:menu_class, menu_options: [:condiment] ]).order(id: :asc)
     new_menu_items = @menu_items.map do |m|
-      {id: m.id, name: m.name, menu_class: m.menu_class.name, object_num: m.object_num, price: m.price, 
-        options: m.menu_options.map {|o| Condiment.select(:id,:name,:price,:object_num).find(o.condiment_id) } }
+      {id: m.id, name: m.name, menu_class: m.menu_class.name, object_num: m.object_num, price: m.price,
+        options: m.menu_options.map {|o| {id: o.condiment_id, name: o.condiment.name, price: o.condiment.price, object_num: o.condiment.object_num, option_id: o.id} } } 
+        # options: m.menu_options.map {|o| Condiment.select(:id,:name,:price,:object_num).find(o.condiment_id) } }
     end
-    # render json: @menu_items
     render json: new_menu_items
   end
 

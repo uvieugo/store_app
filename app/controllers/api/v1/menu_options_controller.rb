@@ -28,7 +28,14 @@ class Api::V1::MenuOptionsController < ApplicationController
     # @menu_option = @menu_item.menu_options.new(menu_option_params)
 
     if @menu_option.save
-      render json: @menu_option, status: :created#, location: @menu_option
+      o = {
+        id: @menu_option.condiment_id, 
+        name: @menu_option.condiment.name, 
+        price: @menu_option.condiment.price, 
+        object_num: @menu_option.condiment.object_num, 
+        option_id: @menu_option.id
+      }
+      render json: o, status: :created#, location: @menu_option
     else
       render json: @menu_option.errors, status: :unprocessable_entity
     end

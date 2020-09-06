@@ -1,10 +1,7 @@
-import React, { useState} from 'react'
+import React from 'react'
 import { useTable, usePagination, useSortBy, useRowSelect, useRowState } from 'react-table'
-import Button from 'react-bootstrap/Button'
-import MyModal from './MyModal'
 
 const Table = (props) => {
-  const [showModal, setShowModal] = useState(false)
   const { columns, data} = props
   const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow, canPreviousPage,
     canNextPage,
@@ -22,10 +19,8 @@ const Table = (props) => {
         {
           Cell: ({ row }) => (
             <>
-            <button onClick={() => rowSelect(row)} disabled={props.isUpdate} >Edit</button>
-            <Button variant="primary" onClick={() => props.handleModalShow(row)} data={row}>
-                Add Options
-            </Button>
+            <button className="btn btn-primary btn-sm mr-1" onClick={() => rowSelect(row)} disabled={props.isUpdate} >Edit</button>
+            <button className="btn btn-primary btn-sm mr-1" onClick={() => props.handleModalShow(row)} data={row} >Options</button>
             </>
           ),
         },  
@@ -37,16 +32,10 @@ const Table = (props) => {
       console.log(props.isUpdate)
       props.setCondiment({...row.values})
     }
-    const handleModalShow = () => {
-      props.setShowModal(true)
-    }
-    const handleModalClose = () => {
-      props.setShowModal(false)
-    }
     return(
     <>
     <table {...getTableProps()} className="table table-bordered mt-2 mb-2">
-            <thead>
+        <thead>
               {headerGroups.map(headerGroup => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map(column => (
@@ -78,8 +67,7 @@ const Table = (props) => {
                       })}
                     </tr>
                   )
-                })}
-                
+                })}              
                 </tbody>
             </table>
         
@@ -126,7 +114,6 @@ const Table = (props) => {
             </ul>
           </nav>
         </div>
-        <MyModal show={showModal} onHide={handleModalClose}/>
       </div>
 
       </>

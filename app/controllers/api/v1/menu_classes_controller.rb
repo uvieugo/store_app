@@ -19,7 +19,7 @@ class Api::V1::MenuClassesController < ApplicationController
     @menu_class = MenuClass.new(menu_class_params)
 
     if @menu_class.save
-      render json: @menu_class, status: :created, location: @menu_class
+      render json: @menu_class, status: :created
     else
       render json: @menu_class.errors, status: :unprocessable_entity
     end

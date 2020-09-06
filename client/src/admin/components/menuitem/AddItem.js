@@ -1,11 +1,5 @@
-import React, {useState} from 'react'
-// import {updateMenuItem, getMenuItems, addMenuItem} from '../../../data/connection'
-// const defMenuItem = {
-//   name: "",
-//   object_num: "",
-//   menu_class: "",
-//   price: 0
-// }
+import React from 'react'
+
 const AddItem = (props) => {
   const menuclassoptions = props.menuclass.map( item => {
     return ( <option key={item.id} value={item.name}>{item.name}</option>)
@@ -15,7 +9,7 @@ const AddItem = (props) => {
     props.setMenuItem( prev => {
       let newItem = {...prev}
       if(name === "price"){
-        newItem[name] = parseInt( value )
+        newItem[name] = value === "" ? 0 : parseInt( value )
       }
       else{
         newItem[name] = value
@@ -23,46 +17,12 @@ const AddItem = (props) => {
       return newItem
     })
   }
-  // const handleClick = (e) =>{
-  //   e.preventDefault()
-  //   if (Object.values(props.menuItem).includes("")){
-  //       alert('please complete the form')
-  //       return
-  //   }
-  //   if(props.isUpdate){
-  //     updateMenuItem(props.menuItem).then(response =>{
-  //       if(response.status === 200 && response.statusText === 'OK'){
-  //         console.log(response.data)
-  //         console.log('debug')
-  //         getMenuItems().then(result => props.setmenuitems(result.data))
-  //       }
-  //       props.setMenuItem(defMenuItem)
-  //       props.setIsUpdate( prev => !prev )
-  //     })
-  //   }else{
-  //     addMenuItem(props.menuItem).then(response =>{
-  //       if(response.status === 201 && response.statusText === 'Created'){
-  //         console.log(response.data)
-  //         props.setmenuitems(prev => {
-  //           let newData = [...prev]
-  //           newData.push(response.data)
-  //           return newData
-  //         })
-  //         props.setMenuItem(defMenuItem)
-  //       }
-  //     })
-  //   }
-  // }
-
-  // const handleCancel = () => {
-  //   props.setIsUpdate( prev => !prev )
-  //   props.setMenuItem(defMenuItem)
-  // }
   return (
     <div className="card">
           <div className="card-body">
             <div className="form">
               <div className="form-group">
+              <label htmlFor="name">Menu Item Name</label>
                 <input 
                   type="text" 
                   name="name"
@@ -73,6 +33,7 @@ const AddItem = (props) => {
                 />
               </div>
               <div className="form-group">
+                <label htmlFor="object_num">Menu Item Object Number</label>
                 <input 
                   type="text" 
                   name="object_num"
@@ -83,6 +44,7 @@ const AddItem = (props) => {
                 />
               </div>
               <div className="form-group">
+                <label htmlFor="price">Menu Item Price</label>
                 <input 
                   type="text" 
                   name="price"
@@ -97,9 +59,9 @@ const AddItem = (props) => {
                   {menuclassoptions}
                 </select>
               </div>
-              <div className="col">
-                <button className="btn btn-secondary" onClick={props.handleClick}>{props.isUpdate ? "Update Menu Item" : "Add Menu Item" }</button>
-                <button className="btn btn-secondary" onClick={props.handleCancel} style={ props.isUpdate ? {} :{display: "none"}  }>Cancel</button>
+              <div className="">
+                <button className="btn btn-primary btn-sm mr-1" onClick={props.handleClick}>{props.isUpdate ? "Update Menu Item" : "Add Menu Item" }</button>
+                <button className="btn btn-secondary btn-sm" onClick={props.handleCancel} style={ props.isUpdate ? {} :{display: "none"}  }>Cancel</button>
               </div>
             </div>
           </div>  

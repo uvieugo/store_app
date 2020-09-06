@@ -1,6 +1,6 @@
 import React from 'react'
 import {getCondiments, addCondiment, updateCondiment} from '../../../data/connection'
-
+import toastr from 'toastr'
 const AddCondiment = (props) => {
   const defCondiment = {
     name: "",
@@ -13,7 +13,7 @@ const AddCondiment = (props) => {
     props.setCondiment( prev => {
       let newItem = {...prev}
       if(name === "price"){
-        newItem[name] = parseInt( value )
+        newItem[name] = value === "" ? 0 : parseInt( value )
       }
       else{
         newItem[name] = value
@@ -40,6 +40,7 @@ const AddCondiment = (props) => {
         }
         props.setCondiment(defCondiment)
         props.setIsUpdate( prev => !prev )
+        toastr.info("Successfully Updated")
       })
     }else{
       addCondiment(props.condiment).then(response =>{
@@ -49,6 +50,7 @@ const AddCondiment = (props) => {
             newData.push(response.data)
             return newData
           })
+          toastr.info("Successfully Added")
           props.setCondiment(defCondiment)
         }
       })
@@ -95,9 +97,9 @@ const AddCondiment = (props) => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="col">
-                <button className="btn btn-secondary" onClick={handleClick}>{props.isUpdate ? "Update Condiment": "Add Condiment" }</button>
-                <button className="btn btn-secondary" onClick={handleCancel} style={ props.isUpdate ? {} :{display: "none"}  }>Cancel</button>
+              <div className="">
+                <button className="btn btn-primary btn-sm mr-1" onClick={handleClick}>{props.isUpdate ? "Update Condiment": "Add Condiment" }</button>
+                <button className="btn btn-secondary btn-sm" onClick={handleCancel} style={ props.isUpdate ? {} :{display: "none"}  }>Cancel</button>
               </div>
             </div>
           </div>  

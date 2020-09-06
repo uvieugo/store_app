@@ -4,7 +4,8 @@ import MenuClass from './components/menuclass/MenuClass'
 import MenuItem from './components/menuitem/MenuItems'
 import Login from './components/Login'
 import './admin.css'
-import 'admin-lte/dist/css/adminlte.css';
+import 'admin-lte/dist/css/adminlte.css'
+import '../css/toastr.min.css'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import ContentArea from './components/ContentArea'
@@ -20,6 +21,7 @@ const Admin = () => {
   const [isLoggedIn, setIsloggedIn] = useState()
   const [activePage, setActivePage] = useState()
   const [selectPage, setSelectPage] = useState()
+  const [pageTitle, setPageTitle] = useState("")
   
   useEffect(() => {
     if (localStorage.getItem('auth_token')){
@@ -47,12 +49,15 @@ const Admin = () => {
     switch (selectPage) {
       case "menuclass":
         setActivePage(<MenuClass menuclass={menuClass} setmenuclass={setMenuClass} />)
+        setPageTitle("Menu Classes")
         break;
       case "condiments":
         setActivePage(<Condiments condiments={condiments} setCondiments={setCondiments}/>)
+        setPageTitle("Condiments")
         break;
       case "menuitems":
-          setActivePage(<MenuItem menuitems={menuItems} condiments={condiments} setmenuitems={setMenuItems} menuclass={menuClass}/>)
+          setActivePage(<MenuItem pageTitle="Menu Items" menuitems={menuItems} condiments={condiments} setmenuitems={setMenuItems} menuclass={menuClass}/>)
+          setPageTitle("Menu Items")
           break;
       default:
         setActivePage(<Dashboard />)
@@ -63,13 +68,6 @@ const Admin = () => {
   
 
   if(isLoggedIn === true){
-    // return (
-    //   <div className="wrapper">
-    //     <Header setIsloggedIn={setIsloggedIn}/>
-    //     <Sidebar setSelectPage={setSelectPage}/>
-    //     <ContentArea activePage={activePage}/>
-    //   </div>
-    // )
     if(isLoading){
       return (<MyLoader />)
     }else{
@@ -77,7 +75,7 @@ const Admin = () => {
         <div className="wrapper">
           <Header setIsloggedIn={setIsloggedIn}/>
           <Sidebar setSelectPage={setSelectPage}/>
-          <ContentArea activePage={activePage}/>
+          <ContentArea activePage={activePage} pageTitle={pageTitle}/>
         </div>
       )
     }

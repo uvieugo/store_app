@@ -1,8 +1,12 @@
-import React, {useState, useMemo, useEffect} from 'react'
+import React, {useState, useMemo} from 'react'
 import {addMenuItem, updateMenuItem, getMenuItems} from '../../../data/connection'
 import Table from './Table'
 import AddItem from './AddItem'
-import AddOption from './AddOption'
+import MenuOption from './MenuOption'
+import Modal from 'react-modal'
+import toastr from 'toastr'
+
+Modal.setAppElement('#root')
 
 const MenuItem = (props) => {
   const defMenuItem = {
@@ -46,7 +50,7 @@ const MenuItem = (props) => {
   const handleClick = (e) =>{
     e.preventDefault()
     if (Object.values(menuItem).includes("")){
-        alert('please complete the form')
+        toastr.info("Please Compete the form")
         return
     }
     if(isUpdate){
@@ -56,6 +60,7 @@ const MenuItem = (props) => {
         }
         setMenuItem(defMenuItem)
         setIsUpdate( prev => !prev )
+        toastr.info("Successfully Updated")
       })
     }else{
       addMenuItem(menuItem).then(response =>{
@@ -65,6 +70,7 @@ const MenuItem = (props) => {
             newData.push(response.data)
             return newData
           })
+          toastr.info("Successfully Added")
           setMenuItem(defMenuItem)
         }
       })
@@ -73,6 +79,13 @@ const MenuItem = (props) => {
   const handleCancel = () => {
     setIsUpdate( prev => !prev )
     setMenuItem(defMenuItem)
+  }
+
+  const removeOption = (e) => {
+    e.preventDefault()
+    let option_id = e.target.attributes.option_id.value
+    console.log(option_id)
+    console.log(props.menuitem)
   }
 
   const handleModalShow = (row) => {
@@ -86,9 +99,6 @@ const MenuItem = (props) => {
     setShowModal(false)
   }
 
-  const optionsList = menuOptions.map( option => {
-    return (<li key={option.id}>{option.name}</li>)
-  })
   return(
     <div className="row">
       <div className="col-md-4">
@@ -102,34 +112,33 @@ const MenuItem = (props) => {
           handleClick={handleClick}
           handleCancel={handleCancel}
         />
-        {showModal &&
-          <div className="card">
-            <div className="card-header">
-              Option for {optionsFor.name}
-            </div>
-            <div className="card-body">
-              Options available
-              <ul>
-              {optionsList}
-              </ul>
-              <AddOption condiments={props.condiments} menuitem={optionsFor} setmenuitems={props.setmenuitems}/>
-            </div>
-          </div>
-        }
+        <Modal
+          isOpen={showModal}
+          className="mymodal"
+          overlayClassName="mymodal-overlay"
+          onRequestClose={() => setShowModal(false)}
+          contentLabel="Example Modal"
+        >
+        <MenuOption condiments={props.condiments} menuitem={optionsFor} setmenuitems={props.setmenuitems} />
+        </Modal>
+        {/* {showModal &&
+          <MenuOption condiments={props.condiments} menuitem={optionsFor} setmenuitems={props.setmenuitems} />
+        } */}
       </div>
+
       <div className="col-md-8">
-      <div className="card">
-        <div className="card-body">
-        <Table 
-          columns={columns} 
-          data={data} 
-          setCondiment={setMenuItem} 
-          setIsUpdate={setIsUpdate} 
-          isUpdate={isUpdate} 
-          handleModalShow={handleModalShow}
-          />
+        <div className="card">
+          <div className="card-body">
+          <Table 
+            columns={columns} 
+            data={data} 
+            setCondiment={setMenuItem} 
+            setIsUpdate={setIsUpdate} 
+            isUpdate={isUpdate} 
+            handleModalShow={handleModalShow}
+            />
+          </div>
         </div>
-      </div>
       </div>   
     </div>
   )
