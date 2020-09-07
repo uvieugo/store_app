@@ -1,5 +1,5 @@
 set :rails_env, 'production'
-before "deploy:assets:precompile", "deploy:yarn_install"
+# before "deploy:assets:precompile", "deploy:yarn_install"
 
 namespace :deploy do
   desc 'Run rake yarn:install'

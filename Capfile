@@ -1,6 +1,9 @@
 # Load DSL and set up stages
 require "capistrano/setup"
-require 'capistrano/rails'
+require "capistrano/deploy"
+# require 'capistrano/rails'
+require 'capistrano/bundler'
+require 'capistrano/rails/migrations'
 require 'capistrano/passenger'
 require 'capistrano/rake'
 # require 'capistrano/rbenv'
