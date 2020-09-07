@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: store_app_production
-  username: store_app
+  database: store_app
+  username: deploy
   password: <%= ENV['STORE_APP_DATABASE_PASSWORD'] %>
